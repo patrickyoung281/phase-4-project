@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const linkstyles = {
     display: "inline-block",
-    width: "50px",
+    width: "150px",
     padding: "12px",
     margin: "0 6px 6px",
     background: "blue",
@@ -25,6 +25,39 @@ const linkstyles = {
             }}
             >
             Home
+            </NavLink>
+
+            <NavLink
+            to="/thesaurus"
+            exact
+            style={linkstyles}
+            activeStyle={{
+                background: "darkblue",
+            }}
+            >
+            Thesaurus
+            </NavLink>
+
+            <NavLink
+            to="/addnewword"
+            exact
+            style={linkstyles}
+            activeStyle={{
+                background: "darkblue",
+            }}
+            >
+            Add a new Word
+            </NavLink>
+
+            <NavLink
+            to="/login"
+            exact
+            style={linkstyles}
+            activeStyle={{
+                background: "darkblue",
+            }}
+            >
+            Login
             </NavLink>
         </div>
     )

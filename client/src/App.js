@@ -4,6 +4,9 @@ import React from "react";
 import Home from "./Home.js";
 import NavBar from './NavBar.js';
 import { Route, Switch } from "react-router-dom";
+import Thesaurus from './Thesaurus';
+import AddNewWord from './AddNewWord.js';
+import Login from './Login.js';
 
 function App() {
   
@@ -14,6 +17,15 @@ function App() {
     <Switch>
       <Route exact path="/home">
         <Home />
+      </Route>
+      <Route exact path="/thesaurus">
+        <Thesaurus />
+      </Route>
+      <Route exact path ="/addnewword">
+        <AddNewWord />
+      </Route>
+      <Route exact path="/login">
+        <Login />
       </Route>
     </Switch>
     {/* <h2>Hello World!</h2>
