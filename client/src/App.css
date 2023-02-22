@@ -42,22 +42,25 @@
 }
 
 .Entries {
-  text-align: center;
-  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .Words {
   color: red;
-  float: left;
-  padding-right: 5%;
-  width: 50%;
+  text-align: center;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 30px;
 }
 
 .images {
   width: 200px;
   height: 200px;
-  float: right;
-  padding-right: 5%;
+  margin-left: auto;
+  padding-right: 50px;
 }
 
 .headers {
@@ -72,4 +75,8 @@
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.List {
+  padding-left: 100px;
 }

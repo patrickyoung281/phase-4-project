@@ -25,6 +25,7 @@ function Thesaurus () {
     return (
         <div>
             <h2 className="headers">You can view the entire Thesaurus here!</h2>
+            <hr />
             {selectedWord ? (
                 <div>
                 <WordDetails 
