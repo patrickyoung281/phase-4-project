@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_21_181722) do
+ActiveRecord::Schema.define(version: 2023_02_22_170803) do
 
   create_table "words", force: :cascade do |t|
     t.string "word_entry"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 2023_02_21_181722) do
     t.string "example_sentence"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "gender"
+    t.string "plural"
+    t.string "part_of_speech"
+    t.string "english_translation"
   end
 
 end
