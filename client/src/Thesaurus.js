@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
-import EntryCreator from "./EntryCreator.js"
+import WordList from "./WordList";
+import WordDetails from "./WordDetails";
 
 
 function Thesaurus () {
 
     const [displayWords, setDisplayWords] = useState([])
+    const [selectedWord, setSelectedWord] = useState(false)
+
+    const handleClick = (id) => {
+        fetch(`/words/${id}`)
+        .then((resp)=>resp.json())
+        .then((data)=>setSelectedWord(data))
+    }
+
+    const backToWordList = () => setSelectedWord(false)
 
     useEffect(()=>{
         fetch("/words")
@@ -12,16 +22,23 @@ function Thesaurus () {
         .then((data)=>setDisplayWords(data));
     }, [])
 
-    const thesaurusList = displayWords.map((entry)=>{
-        return <EntryCreator id={entry.id} word_entry={entry.word_entry} image_url={entry.image_url} example_sentence={entry.example_sentence} />
-    })
-
     return (
         <div>
             <h2 className="headers">You can view the entire Thesaurus here!</h2>
-            <h3>{thesaurusList}</h3>
+            {selectedWord ? (
+                <div>
+                <WordDetails 
+                    selectedWord={selectedWord}
+                    backToWordList={backToWordList} 
+                    />
+            </div>
+            ) : (
+                <div>
+                    <WordList 
+                    displayWords={displayWords} onClick={handleClick}/>
+                </div>
+            )}
         </div>
-    )
-};
-
+    );
+}
 export default Thesaurus;

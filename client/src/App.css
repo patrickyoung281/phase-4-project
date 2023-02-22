@@ -63,3 +63,13 @@
 .headers {
   text-align: center;
 }
+
+.BackToListButtons {
+  display: flex;
+  justify-content: center;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
