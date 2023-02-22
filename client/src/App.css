@@ -45,6 +45,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin: 0 auto;
 }
 
 .Words {
@@ -78,5 +79,30 @@ hr {
 }
 
 .List {
-  padding-left: 100px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  align-items: start;
+}
+
+.form {
+  font-size: 24px;
+  text-align: center;
+}
+
+.labels input {
+  margin-bottom: 20px;
+}
+
+.button {
+  margin: 0 auto;
+  display: block;
+  margin-top: 20px;
+}
+
+.ColumnsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 450px;
 }

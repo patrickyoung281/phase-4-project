@@ -37,9 +37,9 @@ function handleSubmit (e) {
 
     return (
         <div>
-            <h3>Use this form to add a new word to the thesaurus!</h3>
-            <form onSubmit={handleSubmit}>
-                <label>
+            <h3 className="form">Use this form to add a new word to the thesaurus!</h3>
+            <form onSubmit={handleSubmit} className="form">
+                <label className="labels">
                     Word:
                     <input type="text"
                     onChange={handleChange}
@@ -49,7 +49,7 @@ function handleSubmit (e) {
                     </input>
                 </label>
                 <br />
-                <label>
+                <label className="labels">
                     Definition:
                     <input type="text"
                     onChange={handleChange}
@@ -59,7 +59,7 @@ function handleSubmit (e) {
                     </input>
                 </label>
                 <br />
-                <label>
+                <label className="labels">
                     Image URL
                     <input type="text"
                     onChange={handleChange}
@@ -69,7 +69,7 @@ function handleSubmit (e) {
                     </input>
                 </label>
                 <br />
-                <label>
+                <label className="labels">
                     Example Sentence:
                     <input type="text"
                     onChange={handleChange}
@@ -79,7 +79,7 @@ function handleSubmit (e) {
                     </input>
                 </label>
                 <br />
-                <label>
+                <label className="labels">
                     Gender:
                     <input type="text"
                     onChange={handleChange}
@@ -89,7 +89,7 @@ function handleSubmit (e) {
                     </input>
                 </label>
                 <br />
-                <label>
+                <label className="labels">
                     Plural:
                     <input type="text"
                     onChange={handleChange}
@@ -99,7 +99,7 @@ function handleSubmit (e) {
                     </input>
                 </label>
                 <br />
-                <label>
+                <label className="labels">
                     Part of Speech:
                     <input type="text"
                     onChange={handleChange}
@@ -109,7 +109,7 @@ function handleSubmit (e) {
                     </input>
                 </label>
                 <br />
-                <label>
+                <label className="labels">
                     English Translation:
                     <input type="text"
                     onChange={handleChange}
