@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import EditEntry from "./EditEntry";
 
 function WordList ( {displayWords, onClick} ) {
+
+
+    const [editEntry, setEditEntry] = useState(false)
+
+    function onEditEntry () {
+        setEditEntry(current => !current)
+    }
+
 
     return(
         <div>
@@ -17,6 +26,10 @@ function WordList ( {displayWords, onClick} ) {
                         <li><strong>Example Sentence:</strong> {entry.example_sentence}</li>
                     </ul>
                     <button className="button" onClick={() => onClick(entry.id)}>Click here to see synonyms!</button>
+                    <button onClick={() => onEditEntry()}>Click Here to Edit this Entry</button>
+                    <div>
+                        {editEntry ? <EditEntry /> : null}
+                    </div>
                     </div>
                     <img className="images" src={entry.image_url} alt=""/>
                     <br />
