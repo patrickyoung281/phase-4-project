@@ -40,3 +40,26 @@
 .navBar {
   text-align: center;
 }
+
+.Entries {
+  text-align: center;
+  overflow: hidden;
+}
+
+.Words {
+  color: red;
+  float: left;
+  padding-right: 5%;
+  width: 50%;
+}
+
+.images {
+  width: 200px;
+  height: 200px;
+  float: right;
+  padding-right: 5%;
+}
+
+.headers {
+  text-align: center;
+}
