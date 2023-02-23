@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import EditEntry from "./EditEntry";
 
-function WordList ( {displayWords, onClick} ) {
+function WordList ( {displayWords, setDisplayWords, onClick} ) {
 
 
-    const [editEntry, setEditEntry] = useState(false)
+    const [editEntry, setEditEntry] = useState(null)
 
-    function onEditEntry () {
-        setEditEntry(current => !current)
+    function onEditEntry (id) {
+        setEditEntry(id)
     }
 
 
@@ -25,10 +25,12 @@ function WordList ( {displayWords, onClick} ) {
                         <li><strong>English Translation:</strong> {entry.english_translation}</li>
                         <li><strong>Example Sentence:</strong> {entry.example_sentence}</li>
                     </ul>
-                    <button className="button" onClick={() => onClick(entry.id)}>Click here to see synonyms!</button>
-                    <button onClick={() => onEditEntry()}>Click Here to Edit this Entry</button>
+                    <div className="ButtonsContainer">
+                    <button onClick={() => onClick(entry.id)}>Click here to see synonyms!</button>
+                    <button onClick={() => onEditEntry(entry.id)}>Click Here to Edit this Entry</button>
+                    </div>
                     <div>
-                        {editEntry ? <EditEntry /> : null}
+                        {editEntry === entry.id ? <EditEntry displayWords={displayWords} setDisplayWords={setDisplayWords} id={entry.id} word={entry.word_entry} gender={entry.gender} plural={entry.plural} part_of_speech={entry.part_of_speech} english_translation={entry.english_translation} example_sentence={entry.example_sentence} /> : null}
                     </div>
                     </div>
                     <img className="images" src={entry.image_url} alt=""/>

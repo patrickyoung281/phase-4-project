@@ -18,6 +18,16 @@ def create
     render json: word, status: :created 
 end
 
+def update 
+    word = Word.find_by(id: params[:id])
+    if word
+        word.update(word_params)
+        render json: word
+    else
+        render json: { error: "Word not found" }, status: :not_found
+    end
+end
+
 private 
 
 def word_params

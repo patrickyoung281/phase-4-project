@@ -36,7 +36,7 @@ function Thesaurus () {
             ) : (
                 <div>
                     <WordList 
-                    displayWords={displayWords} onClick={handleClick}/>
+                    displayWords={displayWords} setDisplayWords={setDisplayWords} onClick={handleClick}/>
                 </div>
             )}
         </div>
