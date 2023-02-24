@@ -56,6 +56,7 @@ function updateEntry (data) {
                     onChange={handleChange}>
                     </input>
                 </label>
+                <br />
                 <label>
                     Gender:
                     <input
@@ -65,6 +66,7 @@ function updateEntry (data) {
                     onChange={handleChange}>
                     </input>
                 </label>
+                <br />
                 <label>
                     Plural:
                     <input
@@ -74,6 +76,7 @@ function updateEntry (data) {
                     onChange={handleChange}>
                     </input>
                 </label>
+                <br />
                 <label>
                     Part of Speech:
                     <input
@@ -83,6 +86,7 @@ function updateEntry (data) {
                     onChange={handleChange}>
                     </input>
                 </label>
+                <br />
                 <label>
                     English Translation:
                     <input
@@ -92,6 +96,7 @@ function updateEntry (data) {
                     onChange={handleChange}>
                     </input>
                 </label>
+                <br />
                 <label>
                     Example Sentence:
                     <input

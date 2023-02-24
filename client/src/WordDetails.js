@@ -1,4 +1,5 @@
 import React from "react";
+import DisplaySynonyms from "./DisplaySynonyms";
 
 function WordDetails (  {selectedWord, backToWordList} ) {
 
@@ -16,6 +17,8 @@ function WordDetails (  {selectedWord, backToWordList} ) {
                         <img className="images" src={selectedWord.image_url} alt=""/>
                 </div>
             <hr></hr>
+            <h3>List of Synonyms</h3>
+            <DisplaySynonyms selectedWord={selectedWord} />
             <div className="BackToListButtons">
                 <button onClick={()=>backToWordList()}>Back to Thesaurus</button>
             </div>

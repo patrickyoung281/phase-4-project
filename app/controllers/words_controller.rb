@@ -28,6 +28,16 @@ def update
     end
 end
 
+def destroy 
+    word = Word.find_by(id: params[:id])
+    if word
+        word.destroy
+        head :no_content
+    else
+        render json: { error: "Word not found" }, status: :not_found
+    end
+end
+
 private 
 
 def word_params

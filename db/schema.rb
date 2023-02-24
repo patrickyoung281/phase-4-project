@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_22_170803) do
+ActiveRecord::Schema.define(version: 2023_02_23_223523) do
+
+  create_table "synonym_words", force: :cascade do |t|
+    t.string "synonym_id"
+    t.string "word_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "synonyms", force: :cascade do |t|
+    t.string "synonym"
+    t.string "gender"
+    t.string "plural"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "words", force: :cascade do |t|
     t.string "word_entry"
