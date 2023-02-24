@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   # get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
   resources :words, only: [:index, :show, :create, :update, :destroy]
-  resources :synonyms, only: [:create]
+  resources :synonyms, only: [:index, :create]
 
-  get '/words/:id/synonyms', to: 'synonyms#index'
+
+  get '/words/:id/synonyms', to: 'synonyms#index_by_id'
 
 end

@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function AddNewWord () {
+
+useEffect(()=>{
+    fetch("/synonyms")
+    .then((resp)=>resp.json())
+    .then((data)=>setSynonyms(data))
+},[])
+
+const [synonyms, setSynonyms] = useState([])
+const [selectedSynonymId, setSelectedSynonymId] = useState(null)
 
 const [formData, setFormData] = useState({
     word_entry: "",
@@ -15,21 +24,30 @@ const [formData, setFormData] = useState({
 
 function handleChange (e) {
     const name=e.target.name;
-    let value=e.target.value
+    let value=e.target.value;
     setFormData({
         ...formData,
         [name]: value
     });
-}
+} 
+
+const handleSynonymSelect = (e) => {
+    setSelectedSynonymId(e.target.value);
+};
 
 function handleSubmit (e) {
     e.preventDefault();
+    const submission = {
+        ...formData,
+        synonym_id: selectedSynonymId
+    }
+
     fetch("/words", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submission),
     })
     .then((resp)=>resp.json())
     .then((data)=>console.log(data))
@@ -117,6 +135,19 @@ function handleSubmit (e) {
                     value={formData.english_translation}
                     placeholder="English Translation">
                     </input>
+                </label>
+                <br />
+                <label className="labels">
+                    Synonyms: 
+                    <select 
+                    name="synonym_id"
+                    onChange={handleSynonymSelect}
+                    >
+                        <option value="">Select</option>
+                    {Array.isArray(synonyms) && synonyms.map((entry)=>(
+                        <option key={entry.id} value={entry.id}>{entry.synonym}</option>
+                    ))}
+                    </select>
                 </label>
                 <br />
                 <input

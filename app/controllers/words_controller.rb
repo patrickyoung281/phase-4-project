@@ -15,7 +15,13 @@ end
 
 def create 
     word=Word.create(word_params)
-    render json: word, status: :created 
+    synonym_id=params[:synonym_id]
+    if synonym_id
+        synonym_word = SynonymWord.create(word_id: word.id, synonym_id: synonym_id)
+        render json: word, status: :created 
+    else
+        render json: word, status: :created 
+    end
 end
 
 def update 
