@@ -59,6 +59,17 @@ const linkstyles = {
             >
             Login
             </NavLink>
+
+            <NavLink
+            to="/register"
+            exact
+            style={linkstyles}
+            activeStyle={{
+                background: "darkblue",
+            }}
+            >
+            Register
+            </NavLink>
         </div>
     )
   }

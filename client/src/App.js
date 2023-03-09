@@ -7,6 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import Thesaurus from './Thesaurus';
 import AddNewWord from './AddNewWord.js';
 import Login from './Login.js';
+import Register from "./Register";
 
 function App() {
   
@@ -26,6 +27,9 @@ function App() {
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path ="/register">
+        <Register />
       </Route>
     </Switch>
     {/* <h2>Hello World!</h2>
