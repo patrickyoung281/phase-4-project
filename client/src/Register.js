@@ -6,7 +6,7 @@ function Register () {
 
     function handleSubmitRegister(e) {
         e.preventDefault();
-        fetch("/login", {
+        fetch("/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

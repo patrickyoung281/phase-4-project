@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-function Login () {
+function Login ( {onLogin} ) {
 
-const [username, setUsername] = useState("");
+const [username, setUsername] = useState(null);
+
 
 function handleSubmit(e) {
     e.preventDefault();
@@ -11,10 +12,10 @@ function handleSubmit(e) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username: username })
+        body: JSON.stringify({ username })
     })
     .then((r) => r.json())
-    .then((r) => console.log(r))
+    .then((r) => onLogin(r))
 }
 
     return (

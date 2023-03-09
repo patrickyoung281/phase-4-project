@@ -6,9 +6,9 @@ Rails.application.routes.draw do
 
   resources :words, only: [:index, :show, :create, :update, :destroy]
   resources :synonyms, only: [:index, :create]
-  # post "/login", to: "sessions#create"
-  post "/login", to: "users#create"
-
+  post "/login", to: "sessions#create"
+  post "/register", to: "users#create"
   get '/words/:id/synonyms', to: 'synonyms#index_by_id'
+  get "/me", to: "users#show"
 
 end

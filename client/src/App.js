@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./Home.js";
 import NavBar from './NavBar.js';
 import { Route, Switch } from "react-router-dom";
@@ -11,6 +11,21 @@ import Register from "./Register";
 
 function App() {
   
+  const [username, setUsername] = useState(null);
+
+
+  useEffect(()=>{
+    fetch("/me").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUsername(user))
+      }
+    });
+  }, []);
+console.log(username)
+  function handleLogin(username) {
+    setUsername(username)
+  }
+
   return (
     
    <div>
@@ -26,7 +41,7 @@ function App() {
         <AddNewWord />
       </Route>
       <Route exact path="/login">
-        <Login />
+        <Login onLogin={handleLogin} />
       </Route>
       <Route exact path ="/register">
         <Register />
