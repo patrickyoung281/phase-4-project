@@ -17,21 +17,27 @@ function App() {
   useEffect(()=>{
     fetch("/me").then((response) => {
       if (response.ok) {
-        response.json().then((user) => setUsername(user))
+        response.json().then((user) => setUsername(user.username))
       }
     });
   }, []);
 
 
   function handleLogin(response) {
-    const { username } = response;
-    setUsername(username)
+    setUsername(response.username)
   }
+
+function handleLogout () {
+  fetch("/logout", {
+    method: "DELETE",
+  }).then(() => setUsername(null));
+}
 
   return (
     
    <div>
     <Header username={username}/>
+    {username ? <button onClick={handleLogout}>Logout</button> : null}
     <NavBar />
     <Switch>
       <Route exact path="/home">
