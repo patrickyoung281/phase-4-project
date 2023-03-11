@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   post "/register", to: "users#create"
   get '/words/:id/synonyms', to: 'synonyms#index_by_id'
   get "/me", to: "users#show"
+  delete "/logout", to: "sessions#destroy"
 
 end
