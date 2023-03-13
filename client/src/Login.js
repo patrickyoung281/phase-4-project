@@ -3,6 +3,8 @@ import React, { useState } from "react";
 function Login ( {onLogin} ) {
 
 const [username, setUsername] = useState(null);
+const [password, setPassword] = useState("")
+const [passwordConfirmation, setPasswordConfirmation] = useState("")
 
 
 function handleSubmit(e) {
@@ -12,7 +14,11 @@ function handleSubmit(e) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username })
+        body: JSON.stringify({
+                username: username,
+                password,
+                password_confirmation: passwordConfirmation, 
+            }),
     })
     .then((r) => r.json())
     .then((r) => onLogin(r))
@@ -31,6 +37,25 @@ function handleSubmit(e) {
                         onChange={(e) => setUsername(e.target.value)}
                         >
                 </input>
+
+                <label>
+        Password:
+        <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}></input>
+    </label>
+
+    <label>
+        Confirm Password:
+        <input
+        type="password"
+        id="password_confirmation"
+        value={passwordConfirmation}
+        onChange={(e) => setPasswordConfirmation(e.target.value)}></input>
+    </label>
+
                 <button
                     type="submit">Login</button>
                 </label>

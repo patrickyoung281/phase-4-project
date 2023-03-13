@@ -2,7 +2,11 @@ class UsersController < ApplicationController
 
     def create
         username = User.create(user_params)
-        render json: username, status: :created
+        if username.valid?
+            render json: username, status: :created
+        else
+            render json: { errors: user.errors.full.messages }, status: :unprocessable_entity
+        end
     end
     
     def show
@@ -17,6 +21,6 @@ class UsersController < ApplicationController
     private 
     
     def user_params
-        params.permit(:username)
+        params.permit(:username, :password, :password_confirmation)
     end
 end
