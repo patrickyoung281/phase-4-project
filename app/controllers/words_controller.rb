@@ -14,13 +14,14 @@ def show
 end
 
 def create 
-    word=Word.create(word_params)
+    word=Word.new(word_params)
     synonym_id=params[:synonym_id]
-    if synonym_id
+    if word.valid? && synonym_id
+        word.save
         synonym_word = SynonymWord.create(word_id: word.id, synonym_id: synonym_id)
         render json: word, status: :created 
     else
-        render json: word, status: :created 
+        render json: { error: word.errors.full_messages }, status: :unprocessable_entity
     end
 end
 

@@ -10,6 +10,7 @@ useEffect(()=>{
 
 const [synonyms, setSynonyms] = useState([])
 const [selectedSynonymId, setSelectedSynonymId] = useState(null)
+const [errorMessages, setErrorMessages] = useState([])
 
 const [formData, setFormData] = useState({
     word_entry: "",
@@ -49,13 +50,44 @@ function handleSubmit (e) {
         },
         body: JSON.stringify(submission),
     })
-    .then((resp)=>resp.json())
-    .then((data)=>console.log(data))
+    .then((resp)=>{
+        if(resp.ok) {
+            return resp.json();
+        } else {
+            return resp.json().then((errors)=> {
+                throw errors;
+            })
+        }
+    })
+    .then((data)=> {
+        console.log(data);
+        setErrorMessages([])
+    })
+    .catch((errors)=> {
+        console.log(errors);
+        setErrorMessages(errors.error);
+    })
+}
+
+function renderErrors () {
+    if(errorMessages.length > 0) {
+        return (
+            <div>
+                <ul>
+                    {errorMessages.map((error, index) => (
+                        <li key={index}>{error}</li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+    else return null
 }
 
     return (
         <div>
             <h3 className="form">Use this form to add a new word to the thesaurus!</h3>
+            {renderErrors()}
             <form onSubmit={handleSubmit} className="form">
                 <label className="labels">
                     Word:
