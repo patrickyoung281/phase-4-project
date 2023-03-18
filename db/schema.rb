@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_07_205341) do
+ActiveRecord::Schema.define(version: 2023_03_18_164939) do
 
   create_table "synonym_words", force: :cascade do |t|
     t.string "synonym_id"
     t.string "word_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_rating"
   end
 
   create_table "synonyms", force: :cascade do |t|

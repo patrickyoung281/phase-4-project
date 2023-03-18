@@ -1,5 +1,8 @@
 class WordsController < ApplicationController
 
+before_action :authorize
+skip_before_action :authorize, only: [:index, :show]
+
 def index
     words=Word.all
     render json: words
@@ -49,6 +52,10 @@ private
 
 def word_params
     params.permit(:word_entry, :definition, :image_url, :example_sentence, :gender, :plural, :part_of_speech, :english_translation)
+end
+
+def authorize 
+    return render json: { error: "You must be logged in." }, status: :unauthorized unless session.include? :user_id
 end
 
 end

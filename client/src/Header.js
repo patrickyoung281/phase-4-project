@@ -5,9 +5,9 @@ function Header ( {username} ) {
     return (
         <div>
             {username ? (
-                <h3>Welcome, {username}!</h3>
+                <h3>Howdy, {username}!</h3>
             ) : (
-                <h3>Click the Login Link to Login!</h3>
+                <h3>Please login!</h3>
             )}
         </div>
     )

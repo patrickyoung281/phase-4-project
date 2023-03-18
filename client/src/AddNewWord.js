@@ -65,7 +65,7 @@ function handleSubmit (e) {
     })
     .catch((errors)=> {
         console.log(errors);
-        setErrorMessages(errors.error);
+        setErrorMessages(errors.error ? [errors.error] : ["You must be logged in to add a new word."]);
     })
 }
 

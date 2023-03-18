@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   get '/words/:id/synonyms', to: 'synonyms#index_by_id'
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
+  post "/words/:word_id/synonyms/:id/rate", to: "synonym_words#rate"
 
 end
