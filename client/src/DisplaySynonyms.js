@@ -18,34 +18,47 @@ const handleRate = (synonymWord, rating) => {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ synonym_word: { user_rating: rating } }),
+        body: JSON.stringify({ user_rating: rating }),
     })
     .then((resp) => resp.json())
     .then((data) => {
-        const updatedSynonymWord = {
-            ...synonymWord, 
-            user_rating: data.user_rating,
-        };
-        const index = displaySynonyms.findIndex(
-            (entry) => entry.id === updatedSynonymWord.id
-        );
-        const updatedDisplaySynonyms = [
-            ...displaySynonyms.slice(0, index),
-            updatedSynonymWord,
-            ...displaySynonyms.slice(index+1),
-        ]
-        setDisplaySynonyms(updatedDisplaySynonyms)
-    })
+        console.log("rating", data);
+        const updatedSynonyms = displaySynonyms.map((entry) => {
+            if (entry.id === synonymWord.id) {
+                const updatedEntry = {
+                  ...entry,
+                  user_ratings: [...(entry.user_ratings || []), data.user_rating],
+                };
+                return updatedEntry;
+            } else {
+                return entry;
+            }
+        });
+        setDisplaySynonyms(updatedSynonyms);
+    });
 }
 
+const calculateAverageRating = (synonymWord) => {
+    const allRatings = [...(synonymWord.user_ratings || []), ...(synonymWord.ratings || [])];
+    const numRatings = allRatings.length;
+    if (numRatings === 0) {
+      return null;
+    }
+    const sum = allRatings.reduce((total, rating) => total + rating, 0);
+    const average = Math.round((sum / numRatings))
+    return isNaN(average) ? null : average;
+  };
 
 const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry, index)=>{
-    return <ol start={index+1}>
-            <li key={index}>{entry.synonym}</li>
+    const avgRating = calculateAverageRating(entry);
+    console.log('avgRating:', avgRating);
+    return <ol key={entry.id}>
+            <li>{entry.synonym}</li>
                 <ul>
                     <li><strong>Gender:</strong> <em>{entry.gender}</em></li>
                     <li><strong>Plural:</strong> {entry.plural}</li>
-                    <li><strong>User Rating:</strong>{ entry.user_rating }</li>
+                    <li><strong>User Rating:</strong>{""}
+                    {avgRating !== null ? avgRating : "N/A"}</li>
                     <li>
                         <form onSubmit={(e) => {
                         e.preventDefault();
@@ -67,6 +80,10 @@ const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry,
                 </ul>
             </ol>
 }) : null;
+
+
+
+
     return (
         <div>
             <div>{showSynonyms}</div>
