@@ -5,7 +5,7 @@ class UsersController < ApplicationController
         if username.valid?
             render json: username, status: :created
         else
-            render json: { errors: user.errors.full.messages }, status: :unprocessable_entity
+            render json: { errors: username.errors.full_messages }, status: :unprocessable_entity
         end
     end
     

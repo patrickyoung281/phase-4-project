@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Register () {
 
     const [registerUsername, setRegisterUsername] = useState("");
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [errorMessages, setErrorMessages] = useState([])
 
     function handleSubmitRegister(e) {
         e.preventDefault();
@@ -19,10 +20,45 @@ function Register () {
                 password_confirmation: passwordConfirmation, 
             }),
         })
-        .then((r) => r.json())
-        .then((r) => console.log(r))
+        .then((r) => {
+            if(r.ok) {
+                return r.json();
+            } else {
+                return r.json().then((errors)=> {
+                    throw errors;
+                })
+            }
+        })
+        .then((data)=> {
+            setErrorMessages([])
+        })
+        .catch((errors)=> {
+            console.log("Caught errors:", errors);
+            setErrorMessages(errors && errors.errors ? errors.errors : null)
+        })
     }
 
+
+    useEffect(() => {
+        console.log("errorMessages", errorMessages)
+    }, [errorMessages]);
+
+
+function renderErrors () {
+    console.log("errorMessages", errorMessages)
+    if (errorMessages && errorMessages.length>0) {
+        return (
+
+                <ul>
+                    {errorMessages.map((error, index) => (
+                        <li key={index}>{error}</li>
+                    ))}
+                </ul>
+
+        )
+    }
+    else return null
+}
 
     return (
         <div>
@@ -59,7 +95,7 @@ function Register () {
     <button
     type="submit">Register</button>
 </form>
-
+<div>{renderErrors()}</div>
         </div>
     )
 }

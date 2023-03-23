@@ -4,39 +4,52 @@ import AddSynonyms from "./AddSynonyms";
 function DisplaySynonyms ( {selectedWord} ) {
 
 const [displaySynonyms, setDisplaySynonyms] = useState([])
+const [averageRatings, setAverageRatings] = useState({});
 
 useEffect (()=>{
     fetch(`/words/${selectedWord.id}/synonyms`)
     .then((resp)=>resp.json())
-    .then((data)=>setDisplaySynonyms(data))
-}, [selectedWord])
+    .then((data)=>{
+      setDisplaySynonyms(data);
+      const ratings = {};
+      data.forEach((synonym) => {
+        ratings[synonym.id] = calculateAverageRating(synonym);
+      });
+      setAverageRatings(ratings);
+    });
+  },[selectedWord]);
 
 
-const handleRate = (synonymWord, rating) => {
+  const handleRate = (synonymWord, rating) => {
     fetch(`/words/${selectedWord.id}/synonyms/${synonymWord.id}/rate`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_rating: rating }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_rating: rating }),
     })
-    .then((resp) => resp.json())
-    .then((data) => {
+      .then((resp) => resp.json())
+      .then((data) => {
         console.log("rating", data);
         const updatedSynonyms = displaySynonyms.map((entry) => {
-            if (entry.id === synonymWord.id) {
-                const updatedEntry = {
-                  ...entry,
-                  user_ratings: [...(entry.user_ratings || []), data.user_rating],
-                };
-                return updatedEntry;
-            } else {
-                return entry;
-            }
+          if (entry.id === synonymWord.id) {
+            const updatedEntry = {
+              ...entry,
+              user_ratings: [...(entry.user_ratings || []), data.user_rating],
+            };
+            const updatedAvgRating = calculateAverageRating(updatedEntry);
+            setAverageRatings({
+              ...averageRatings,
+              [updatedEntry.id]: updatedAvgRating,
+            });
+            return updatedEntry;
+          } else {
+            return entry;
+          }
         });
         setDisplaySynonyms(updatedSynonyms);
-    });
-}
+      });
+  };
 
 const calculateAverageRating = (synonymWord) => {
     const allRatings = [...(synonymWord.user_ratings || []), ...(synonymWord.ratings || [])];
