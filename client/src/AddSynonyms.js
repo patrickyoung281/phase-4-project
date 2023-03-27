@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function AddSynonyms ( {selectedWord, setDisplaySynonyms, displaySynonyms} ) {
 
-
+const [errorMessages, setErrorMessages] = useState([])
 const [formData, setFormData] = useState({
     synonym: "",
     gender: "",
@@ -31,8 +31,40 @@ function handleSubmit (e) {
         },
         body: JSON.stringify(submission),
     })
-    .then((resp)=>resp.json())
-    .then((data)=>setDisplaySynonyms([...displaySynonyms, data]))
+    .then((resp)=> {
+        if(resp.ok) {
+            return resp.json().then((data)=>setDisplaySynonyms([...displaySynonyms, data]))
+        } else {
+            return resp.json().then((errors)=> {
+                throw errors;
+            })
+        }
+    })
+    .catch((errors)=>{
+        setErrorMessages(errors && errors.errors ? errors.errors : null)
+    })
+    
+}
+
+useEffect(() => {
+    console.log("errorMessages", errorMessages)
+}, [errorMessages]);
+
+
+function renderErrors () {
+console.log("errorMessages", errorMessages)
+if (errorMessages && errorMessages.length>0) {
+    return (
+<div>
+            <ul>
+                {errorMessages.map((error, index) => (
+                    <li key={index}>{error}</li>
+                ))}
+            </ul>
+            </div>
+    )
+}
+else return null
 }
 
     return (
@@ -49,6 +81,7 @@ function handleSubmit (e) {
                     ></input>
                 </label>
                 <br />
+                <div>{renderErrors()}</div>
                 <label>
                     Gender: 
                     <input

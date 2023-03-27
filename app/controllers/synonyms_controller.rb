@@ -14,10 +14,10 @@ end
 def create
     word = Word.find(params[:word_id])
     synonym = word.synonyms.create(synonym_params)
-    if synonym
+    if synonym.valid?
         render json: synonym, status: :created
     else
-        render json: { error: "Failed to create synonym" }, status: :unprocessable_entity
+        render json: { errors: synonym.errors.full_messages }, status: :unprocessable_entity
     end
 end
 

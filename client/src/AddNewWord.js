@@ -65,12 +65,12 @@ function handleSubmit (e) {
     })
     .catch((errors)=> {
         console.log(errors);
-        setErrorMessages(errors.error ? ["You must login to create a new word entry."] : [null]);
+        setErrorMessages(errors && errors.errors ? errors.errors : null)
     })
 }
 
 function renderErrors () {
-    if(errorMessages.length > 0) {
+    if(errorMessages && errorMessages.length > 0) {
         return (
             <div>
                 <ul>
@@ -87,7 +87,7 @@ function renderErrors () {
     return (
         <div>
             <h3 className="form">Use this form to add a new word to the thesaurus!</h3>
-            {renderErrors()}
+            <div>{renderErrors()}</div>
             <form onSubmit={handleSubmit} className="form">
                 <label className="labels">
                     Word:

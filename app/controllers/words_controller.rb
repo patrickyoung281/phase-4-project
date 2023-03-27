@@ -24,7 +24,7 @@ def create
         synonym_word = SynonymWord.create(word_id: word.id, synonym_id: synonym_id)
         render json: word, status: :created 
     else
-        render json: { error: "A new word must have a word, a definition, and an English translation." }, status: :unprocessable_entity
+        render json: { errors: word.errors.full_messages }, status: :unprocessable_entity
     end
 end
 
