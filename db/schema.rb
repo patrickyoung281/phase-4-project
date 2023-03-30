@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_18_164939) do
+ActiveRecord::Schema.define(version: 2023_03_30_191331) do
 
   create_table "synonym_words", force: :cascade do |t|
     t.string "synonym_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2023_03_18_164939) do
     t.string "plural"
     t.string "part_of_speech"
     t.string "english_translation"
+    t.integer "user_id"
   end
 
 end

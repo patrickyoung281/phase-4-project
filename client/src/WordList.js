@@ -3,7 +3,7 @@ import EditEntry from "./EditEntry";
 
 function WordList ( {displayWords, setDisplayWords, onClick} ) {
 
-
+    const [errorMessages, setErrorMessages] = useState([])
     const [editEntry, setEditEntry] = useState(null)
 
     function onEditEntry (id) {
@@ -14,8 +14,36 @@ function WordList ( {displayWords, setDisplayWords, onClick} ) {
         fetch(`/words/${id}`, {
             method: "DELETE",
         })
-        .then(()=>onDeleteEntry(id));
+        .then((resp)=>{
+            if(resp.ok) {
+                onDeleteEntry(id);
+            } else {
+                return resp.json().then((errors)=>{
+                    throw errors;
+                })
+            }            
+    })
+    .catch((error)=>{
+        console.log("errors", error)
+        setErrorMessages([error.error]);
+    })
+
+}
+
+function renderErrors () {
+    if(errorMessages && errorMessages.length > 0) {
+        return (
+            <div>
+                <ul>
+                    {errorMessages.map((error, index) => (
+                        <li key={index}>{error}</li>
+                    ))}
+                </ul>
+            </div>
+        )
     }
+    else return null
+}
 
     function onDeleteEntry (id) {
         const newList = displayWords.filter(entry=>{
@@ -42,6 +70,7 @@ function WordList ( {displayWords, setDisplayWords, onClick} ) {
                     <button onClick={() => onClick(entry.id)}>Click here to see synonyms!</button>
                     <button onClick={() => onEditEntry(entry.id)}>Click Here to Edit this Entry</button>
                     <button onClick={() => onDeleteClick(entry.id)}>Delete this Entry</button>
+                    <div>{renderErrors()}</div>
                     </div>
                     <div>
                         {editEntry === entry.id ? <EditEntry displayWords={displayWords} setDisplayWords={setDisplayWords} id={entry.id} word={entry.word_entry} gender={entry.gender} plural={entry.plural} part_of_speech={entry.part_of_speech} english_translation={entry.english_translation} example_sentence={entry.example_sentence} /> : null}

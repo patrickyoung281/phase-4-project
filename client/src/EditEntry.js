@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function EditEntry ( { displayWords, setDisplayWords, id, word, gender, plural, part_of_speech, english_translation, example_sentence} ) {
 
+const [errorMessages, setErrorMessages] = useState([])
 const [formData, setFormData] =useState ({
     id: id,
     word_entry: word,
@@ -32,8 +33,38 @@ function handleSubmit (e) {
         },
         body: JSON.stringify(formData)
     })
-    .then((resp)=>resp.json())
-    .then((data)=>updateEntry(data))
+    .then((resp)=>{
+        if(resp.ok) {
+            return resp.json();
+        } else {
+            return resp.json().then((errors)=>{
+                throw errors;
+            })
+        }
+    })
+    .then((data)=>{
+        updateEntry(data)
+    })
+    .catch((error)=>{
+        console.log("errors", error)
+        setErrorMessages([error.error]);
+    })
+    
+}
+
+function renderErrors () {
+    if(errorMessages && errorMessages.length > 0) {
+        return (
+            <div>
+                <ul>
+                    {errorMessages.map((error, index) => (
+                        <li key={index}>{error}</li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+    else return null
 }
 
 function updateEntry (data) {
@@ -46,6 +77,7 @@ function updateEntry (data) {
     return (
         <div>
             <h3>Hello! Edit This entry here.</h3>
+            <div>{renderErrors()}</div>
             <form onSubmit={handleSubmit}>
                 <label>
                     Word:
@@ -91,7 +123,7 @@ function updateEntry (data) {
                     English Translation:
                     <input
                     type="text"
-                    name="english_tranlation"
+                    name="english_translation"
                     value={formData.english_translation}
                     onChange={handleChange}>
                     </input>
