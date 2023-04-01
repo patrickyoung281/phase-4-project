@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function AddNewWord () {
+function AddNewWord ( {setErrorMessages, renderErrors} ) {
 
 useEffect(()=>{
     fetch("/synonyms")
@@ -10,7 +10,6 @@ useEffect(()=>{
 
 const [synonyms, setSynonyms] = useState([])
 const [selectedSynonymId, setSelectedSynonymId] = useState(null)
-const [errorMessages, setErrorMessages] = useState([])
 
 const [formData, setFormData] = useState({
     word_entry: "",
@@ -67,21 +66,6 @@ function handleSubmit (e) {
         console.log(errors);
         setErrorMessages(errors && errors.errors ? errors.errors : null)
     })
-}
-
-function renderErrors () {
-    if(errorMessages && errorMessages.length > 0) {
-        return (
-            <div>
-                <ul>
-                    {errorMessages.map((error, index) => (
-                        <li key={index}>{error}</li>
-                    ))}
-                </ul>
-            </div>
-        )
-    }
-    else return null
 }
 
     return (

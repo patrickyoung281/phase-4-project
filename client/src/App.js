@@ -12,7 +12,7 @@ import Header from './Header';
 function App() {
   
   const [username, setUsername] = useState(null);
-
+  const [errorMessages, setErrorMessages] = useState([])
 
   useEffect(()=>{
     fetch("/me").then((response) => {
@@ -21,7 +21,6 @@ function App() {
       }
     });
   }, []);
-
 
   function handleLogin(response) {
     setUsername(response.username)
@@ -32,6 +31,22 @@ function handleLogout () {
     method: "DELETE",
   }).then(() => setUsername(null));
 }
+
+function renderErrors () {
+  if(errorMessages && errorMessages.length > 0) {
+      return (
+          <div>
+              <ul>
+                  {errorMessages.map((error, index) => (
+                      <li key={index}>{error}</li>
+                  ))}
+              </ul>
+          </div>
+      )
+  }
+  else return null
+}
+
 
   return (
     
@@ -47,7 +62,9 @@ function handleLogout () {
         <Thesaurus />
       </Route>
       <Route exact path ="/addnewword">
-        <AddNewWord />
+        <AddNewWord 
+        setErrorMessages={setErrorMessages} 
+        renderErrors={renderErrors}/>
       </Route>
       <Route exact path="/login">
         <Login onLogin={handleLogin} />
