@@ -3,7 +3,7 @@ import WordList from "./WordList";
 import WordDetails from "./WordDetails";
 
 
-function Thesaurus () {
+function Thesaurus ( {setErrorMessages, renderErrors} ) {
 
     const [displayWords, setDisplayWords] = useState([])
     const [selectedWord, setSelectedWord] = useState(false)
@@ -36,7 +36,11 @@ function Thesaurus () {
             ) : (
                 <div>
                     <WordList 
-                    displayWords={displayWords} setDisplayWords={setDisplayWords} onClick={handleClick}/>
+                    displayWords={displayWords} 
+                    setDisplayWords={setDisplayWords} 
+                    onClick={handleClick}
+                    setErrorMessages={setErrorMessages} 
+                    renderErrors={renderErrors} />
                 </div>
             )}
         </div>

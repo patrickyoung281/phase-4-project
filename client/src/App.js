@@ -59,7 +59,9 @@ function renderErrors () {
         <Home />
       </Route>
       <Route exact path="/thesaurus">
-        <Thesaurus />
+        <Thesaurus
+        setErrorMessages={setErrorMessages} 
+        renderErrors={renderErrors} />
       </Route>
       <Route exact path ="/addnewword">
         <AddNewWord 

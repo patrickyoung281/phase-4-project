@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import EditEntry from "./EditEntry";
 
-function WordList ( {displayWords, setDisplayWords, onClick} ) {
+function WordList ( {displayWords, setDisplayWords, onClick, setErrorMessages, renderErrors} ) {
 
-    const [errorMessages, setErrorMessages] = useState([])
     const [editEntry, setEditEntry] = useState(null)
 
     function onEditEntry (id) {
@@ -28,21 +27,6 @@ function WordList ( {displayWords, setDisplayWords, onClick} ) {
         setErrorMessages([error.error]);
     })
 
-}
-
-function renderErrors () {
-    if(errorMessages && errorMessages.length > 0) {
-        return (
-            <div>
-                <ul>
-                    {errorMessages.map((error, index) => (
-                        <li key={index}>{error}</li>
-                    ))}
-                </ul>
-            </div>
-        )
-    }
-    else return null
 }
 
     function onDeleteEntry (id) {
