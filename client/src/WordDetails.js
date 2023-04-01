@@ -1,7 +1,7 @@
 import React from "react";
 import DisplaySynonyms from "./DisplaySynonyms";
 
-function WordDetails (  {selectedWord, backToWordList} ) {
+function WordDetails (  {selectedWord, backToWordList, setErrorMessages, renderErrors} ) {
 
     return (
         <div>
@@ -18,7 +18,10 @@ function WordDetails (  {selectedWord, backToWordList} ) {
                 </div>
             <hr></hr>
             <h3>List of Synonyms</h3>
-            <DisplaySynonyms selectedWord={selectedWord} />
+            <DisplaySynonyms 
+            selectedWord={selectedWord}
+            setErrorMessages={setErrorMessages} 
+            renderErrors={renderErrors} />
             <div className="BackToListButtons">
                 <button onClick={()=>backToWordList()}>Back to Thesaurus</button>
             </div>

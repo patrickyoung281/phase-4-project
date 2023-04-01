@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AddSynonyms from "./AddSynonyms";
 
-function DisplaySynonyms ( {selectedWord} ) {
+function DisplaySynonyms ( {selectedWord, setErrorMessages, renderErrors} ) {
 
 const [displaySynonyms, setDisplaySynonyms] = useState([])
 const [averageRatings, setAverageRatings] = useState({});
@@ -101,7 +101,12 @@ const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry,
         <div>
             <div>{showSynonyms}</div>
             <div>
-                <AddSynonyms selectedWord={selectedWord} setDisplaySynonyms={setDisplaySynonyms} displaySynonyms={displaySynonyms}/>
+                <AddSynonyms 
+                selectedWord={selectedWord} 
+                setDisplaySynonyms={setDisplaySynonyms} 
+                displaySynonyms={displaySynonyms}
+                setErrorMessages={setErrorMessages} 
+                renderErrors={renderErrors}/>
             </div>
         </div>
     )

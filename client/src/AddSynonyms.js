@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-function AddSynonyms ( {selectedWord, setDisplaySynonyms, displaySynonyms} ) {
+function AddSynonyms ( {selectedWord, setDisplaySynonyms, displaySynonyms, setErrorMessages, renderErrors} ) {
 
-const [errorMessages, setErrorMessages] = useState([])
 const [formData, setFormData] = useState({
     synonym: "",
     gender: "",
@@ -44,27 +43,6 @@ function handleSubmit (e) {
         setErrorMessages(errors && errors.errors ? errors.errors : null)
     })
     
-}
-
-useEffect(() => {
-    console.log("errorMessages", errorMessages)
-}, [errorMessages]);
-
-
-function renderErrors () {
-console.log("errorMessages", errorMessages)
-if (errorMessages && errorMessages.length>0) {
-    return (
-<div>
-            <ul>
-                {errorMessages.map((error, index) => (
-                    <li key={index}>{error}</li>
-                ))}
-            </ul>
-            </div>
-    )
-}
-else return null
 }
 
     return (

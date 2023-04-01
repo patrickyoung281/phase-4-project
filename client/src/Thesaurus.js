@@ -30,7 +30,9 @@ function Thesaurus ( {setErrorMessages, renderErrors} ) {
                 <div>
                 <WordDetails 
                     selectedWord={selectedWord}
-                    backToWordList={backToWordList} 
+                    backToWordList={backToWordList}
+                    setErrorMessages={setErrorMessages} 
+                    renderErrors={renderErrors} 
                     />
             </div>
             ) : (
