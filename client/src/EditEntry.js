@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-function EditEntry ( { displayWords, setDisplayWords, id, word, gender, plural, part_of_speech, english_translation, example_sentence} ) {
+function EditEntry ( { displayWords, setDisplayWords, id, word, gender, plural, part_of_speech, english_translation, example_sentence, setErrorMessages, renderErrors} ) {
 
-const [errorMessages, setErrorMessages] = useState([])
 const [formData, setFormData] =useState ({
     id: id,
     word_entry: word,
@@ -50,21 +49,6 @@ function handleSubmit (e) {
         setErrorMessages([error.error]);
     })
     
-}
-
-function renderErrors () {
-    if(errorMessages && errorMessages.length > 0) {
-        return (
-            <div>
-                <ul>
-                    {errorMessages.map((error, index) => (
-                        <li key={index}>{error}</li>
-                    ))}
-                </ul>
-            </div>
-        )
-    }
-    else return null
 }
 
 function updateEntry (data) {

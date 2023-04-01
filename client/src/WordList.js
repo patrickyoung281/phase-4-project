@@ -57,7 +57,18 @@ function WordList ( {displayWords, setDisplayWords, onClick, setErrorMessages, r
                     <div>{renderErrors()}</div>
                     </div>
                     <div>
-                        {editEntry === entry.id ? <EditEntry displayWords={displayWords} setDisplayWords={setDisplayWords} id={entry.id} word={entry.word_entry} gender={entry.gender} plural={entry.plural} part_of_speech={entry.part_of_speech} english_translation={entry.english_translation} example_sentence={entry.example_sentence} /> : null}
+                        {editEntry === entry.id ? <EditEntry 
+                        displayWords={displayWords} 
+                        setDisplayWords={setDisplayWords} 
+                        id={entry.id} 
+                        word={entry.word_entry} 
+                        gender={entry.gender} 
+                        plural={entry.plural} 
+                        part_of_speech={entry.part_of_speech} 
+                        english_translation={entry.english_translation} 
+                        example_sentence={entry.example_sentence}
+                        setErrorMessages={setErrorMessages} 
+                        renderErrors={renderErrors} /> : null}
                     </div>
                     </div>
                     <img className="images" src={entry.image_url} alt=""/>
