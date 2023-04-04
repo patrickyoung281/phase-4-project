@@ -21,7 +21,7 @@ function Thesaurus ( {setErrorMessages, renderErrors} ) {
         .then((resp)=>resp.json())
         .then((data)=>setDisplayWords(data));
     }, [])
-
+console.log("display", displayWords)
     return (
         <div>
             <h2 className="headers">You can view the entire Thesaurus here!</h2>

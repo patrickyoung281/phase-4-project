@@ -61,7 +61,7 @@ function updateEntry (data) {
     return (
         <div>
             <h3>Hello! Edit This entry here.</h3>
-            <div>{renderErrors()}</div>
+            {/* <div>{renderErrors()}</div> */}
             <form onSubmit={handleSubmit}>
                 <label>
                     Word:

@@ -1,3 +1,3 @@
 class SynonymSerializer < ActiveModel::Serializer
-  attributes :id, :gender, :plural
+  attributes :id, :gender, :plural, :synonym
 end

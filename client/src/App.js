@@ -47,7 +47,6 @@ function renderErrors () {
   else return null
 }
 
-
   return (
     
    <div>
