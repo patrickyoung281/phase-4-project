@@ -64,7 +64,6 @@ const calculateAverageRating = (synonymWord) => {
 
 const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry, index)=>{
     const avgRating = calculateAverageRating(entry);
-    console.log('display', displaySynonyms);
     return <ol key={entry.id}>
             <div key={entry.id}>{entry.synonym}</div>
                 <ul>

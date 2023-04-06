@@ -63,7 +63,6 @@ function handleSubmit (e) {
         setErrorMessages([])
     })
     .catch((errors)=> {
-        console.log(errors);
         setErrorMessages(errors && errors.errors ? errors.errors : null)
     })
 }
