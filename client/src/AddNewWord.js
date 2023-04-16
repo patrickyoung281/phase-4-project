@@ -38,8 +38,11 @@ const handleSynonymSelect = (e) => {
 function handleSubmit (e) {
     e.preventDefault();
     const submission = {
-        ...formData,
-        synonym_id: selectedSynonymId
+        ...formData
+    }
+    
+    if (selectedSynonymId) {
+        submission.synonym_id = selectedSynonymId;
     }
 
     fetch("/words", {

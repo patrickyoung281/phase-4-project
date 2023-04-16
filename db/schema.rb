@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_30_191331) do
+ActiveRecord::Schema.define(version: 2023_04_06_154028) do
 
   create_table "synonym_words", force: :cascade do |t|
-    t.string "synonym_id"
-    t.string "word_id"
+    t.integer "synonym_id"
+    t.integer "word_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_rating"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 2023_03_30_191331) do
     t.string "part_of_speech"
     t.string "english_translation"
     t.integer "user_id"
+    t.integer "synonym_id"
+    t.index ["synonym_id"], name: "index_words_on_synonym_id"
   end
 
 end

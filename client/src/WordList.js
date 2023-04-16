@@ -4,9 +4,12 @@ import EditEntry from "./EditEntry";
 function WordList ( {displayWords, setDisplayWords, onClick, setErrorMessages, renderErrors} ) {
 
     const [editEntry, setEditEntry] = useState(null)
+    const [deletedEntryError, setDeletedEntryError] = useState({});
+    const [errorEntryId, setErrorEntryId] = useState(null)
 
     function onEditEntry (id) {
         setEditEntry(id)
+        setErrorEntryId(null)
     }
 
     function onDeleteClick (id) {
@@ -18,12 +21,12 @@ function WordList ( {displayWords, setDisplayWords, onClick, setErrorMessages, r
                 onDeleteEntry(id);
             } else {
                 return resp.json().then((errors)=>{
+                    setDeletedEntryError({ [id]: errors })
                     throw errors;
                 })
             }            
     })
     .catch((error)=>{
-        console.log("errors", error)
         setErrorMessages([error.error]);
     })
 
@@ -54,21 +57,30 @@ function WordList ( {displayWords, setDisplayWords, onClick, setErrorMessages, r
                     <button onClick={() => onClick(entry.id)}>Click here to see synonyms!</button>
                     <button onClick={() => onEditEntry(entry.id)}>Click Here to Edit this Entry</button>
                     <button onClick={() => onDeleteClick(entry.id)}>Delete this Entry</button>
-                    <div>{renderErrors()}</div>
+                    <div>{deletedEntryError[entry.id] && (
+                        <div>{renderErrors(deletedEntryError[entry.id])}</div>
+                    )}</div>
                     </div>
                     <div>
-                        {editEntry === entry.id ? <EditEntry 
-                        displayWords={displayWords} 
-                        setDisplayWords={setDisplayWords} 
-                        id={entry.id} 
-                        word={entry.word_entry} 
-                        gender={entry.gender} 
-                        plural={entry.plural} 
-                        part_of_speech={entry.part_of_speech} 
-                        english_translation={entry.english_translation} 
-                        example_sentence={entry.example_sentence}
-                        setErrorMessages={setErrorMessages} 
-                        renderErrors={renderErrors} /> : null}
+                        {editEntry === entry.id ? (
+                        <div>
+                            <EditEntry 
+                                displayWords={displayWords} 
+                                setDisplayWords={setDisplayWords} 
+                                id={entry.id} 
+                                word={entry.word_entry} 
+                                gender={entry.gender} 
+                                plural={entry.plural} 
+                                part_of_speech={entry.part_of_speech} 
+                                english_translation={entry.english_translation} 
+                                example_sentence={entry.example_sentence}
+                                setErrorMessages={setErrorMessages} 
+                                setErrorEntryId={setErrorEntryId} 
+                                renderErrors={renderErrors}
+                            /> 
+                            {errorEntryId === entry.id && renderErrors()}
+                            </div> 
+                        ) : null}
                     </div>
                     </div>
                     <img className="images" src={entry.image_url} alt=""/>

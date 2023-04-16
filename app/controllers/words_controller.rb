@@ -61,7 +61,7 @@ end
 private 
 
 def word_params
-    params.permit(:word_entry, :definition, :image_url, :example_sentence, :gender, :plural, :part_of_speech, :english_translation, :user_id)
+    params.permit(:word_entry, :definition, :image_url, :example_sentence, :gender, :plural, :part_of_speech, :english_translation, :user_id, :synonym_id)
 end
 
 def authorize 

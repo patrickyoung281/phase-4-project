@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EditEntry ( { displayWords, setDisplayWords, id, word, gender, plural, part_of_speech, english_translation, example_sentence, setErrorMessages, renderErrors} ) {
+function EditEntry ( { displayWords, setDisplayWords, id, word, gender, plural, part_of_speech, english_translation, example_sentence, setErrorMessages, setErrorEntryId, renderErrors, errorEntryId} ) {
 
 const [formData, setFormData] =useState ({
     id: id,
@@ -45,8 +45,8 @@ function handleSubmit (e) {
         updateEntry(data)
     })
     .catch((error)=>{
-        console.log("errors", error)
         setErrorMessages([error.error]);
+        setErrorEntryId(id);
     })
     
 }
@@ -61,7 +61,6 @@ function updateEntry (data) {
     return (
         <div>
             <h3>Hello! Edit This entry here.</h3>
-            {/* <div>{renderErrors()}</div> */}
             <form onSubmit={handleSubmit}>
                 <label>
                     Word:
@@ -129,6 +128,7 @@ function updateEntry (data) {
                 value="Edit This Entry">
                 </input>
             </form>
+            {errorEntryId === id && renderErrors()}
         </div>
     )
 }
