@@ -16,11 +16,11 @@ App<br>
   ↪Navbar<br>
   ↪Home<br>
   ↪Thesaurus<br>
-	  ↪WordList<br>
-		  ↪EditEntry<br>
-	  ↪WordDetails<br>
-		  ↪DisplaySynonyms<br>
-			  ↪AddSynonyms<br>
+	  ↪↪WordList<br>
+		  ↪↪↪EditEntry<br>
+	  ↪↪WordDetails<br>
+		  ↪↪↪DisplaySynonyms<br>
+			  ↪↪↪↪AddSynonyms<br>
   ↪AddNewWord<br>
   ↪Login<br>
   ↪Register<br>
