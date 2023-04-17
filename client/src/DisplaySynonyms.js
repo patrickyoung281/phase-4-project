@@ -3,8 +3,9 @@ import AddSynonyms from "./AddSynonyms";
 
 function DisplaySynonyms ( {selectedWord, setErrorMessages, renderErrors} ) {
 
-const [displaySynonyms, setDisplaySynonyms] = useState([])
+const [displaySynonyms, setDisplaySynonyms] = useState([]);
 const [averageRatings, setAverageRatings] = useState({});
+const [displayAssociatedWords, setDisplayAssociatedWords] =useState({});
 
 useEffect (()=>{
     fetch(`/words/${selectedWord.id}/synonyms`)
@@ -62,8 +63,11 @@ const calculateAverageRating = (synonymWord) => {
     return isNaN(average) ? null : average;
   };
 
+
+
 const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry, index)=>{
     const avgRating = calculateAverageRating(entry);
+    const showAssociatedWords = displayAssociatedWords[entry.id];
     return <ol key={entry.id}>
             <div key={entry.id}>{entry.synonym}</div>
                 <ul>
@@ -89,7 +93,22 @@ const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry,
                             type="submit">Rate</button>
                         </form>
                     </li>
-                    <li><div><button>See Associated Words</button><span>Click here to view other words related to this synonym.</span></div></li>
+                    <li><div>
+                      <button onClick={()=>setDisplayAssociatedWords({
+                        ...displayAssociatedWords,
+                        [entry.id]: !showAssociatedWords
+                      })}>
+                        {showAssociatedWords ? 'Hide Associated Words' : 'See Associated Words'}
+                        </button>
+                        <span>Click here to view other words related to this synonym.</span>
+                      </div>
+                      {showAssociatedWords && (
+                        <ul>
+                          {entry.words.map(word=>(
+                            <li key={word.id}>{word.word_entry}</li>
+                          ))}
+                        </ul>
+                      )}</li>
                 </ul>
             </ol>
 }) : null;
