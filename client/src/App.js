@@ -68,7 +68,9 @@ function renderErrors () {
       <Route exact path ="/addnewword">
         <AddNewWord 
         setErrorMessages={setErrorMessages} 
-        renderErrors={renderErrors}/>
+        renderErrors={renderErrors}
+        displayWords={displayWords}
+        setDisplayWords={setDisplayWords}/>
       </Route>
       <Route exact path="/login">
         <Login onLogin={handleLogin} />

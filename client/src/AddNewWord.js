@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function AddNewWord ( {setErrorMessages, renderErrors} ) {
+function AddNewWord ( {setErrorMessages, renderErrors, displayWords, setDisplayWords} ) {
 
 useEffect(()=>{
     fetch("/synonyms")
@@ -62,7 +62,7 @@ function handleSubmit (e) {
         }
     })
     .then((data)=> {
-        console.log(data);
+        setDisplayWords([...displayWords, data]);
         setErrorMessages([])
     })
     .catch((errors)=> {
