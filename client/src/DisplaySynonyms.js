@@ -64,6 +64,13 @@ const calculateAverageRating = (synonymWord) => {
   };
 
 const handleDisplayAssociatedWords = (synonymID)=>{
+  const showAssociatedWords = displayAssociatedWords[synonymID];
+  if (showAssociatedWords) {
+    setDisplayAssociatedWords({
+      ...displayAssociatedWords,
+      [synonymID]: null
+    });
+  } else {
   fetch(`/synonyms/${synonymID}/words`)
     .then((resp)=>resp.json())
     .then((data)=>{
@@ -73,7 +80,7 @@ const handleDisplayAssociatedWords = (synonymID)=>{
       })
     })
 }
-
+}
 const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry, index)=>{
     console.log("displaySynonyms", displaySynonyms)
     const avgRating = calculateAverageRating(entry);
