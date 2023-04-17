@@ -89,12 +89,10 @@ const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry,
                             type="submit">Rate</button>
                         </form>
                     </li>
+                    <li><div><button>See Associated Words</button><span>Click here to view other words related to this synonym.</span></div></li>
                 </ul>
             </ol>
 }) : null;
-
-
-
 
     return (
         <div>

@@ -8,7 +8,7 @@ end
 
 def index
     synonyms=Synonym.all 
-    render json: synonyms 
+    render json: synonyms, include: :word 
 end
 
 def create
