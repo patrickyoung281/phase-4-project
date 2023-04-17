@@ -13,6 +13,7 @@ function App() {
   
   const [username, setUsername] = useState(null);
   const [errorMessages, setErrorMessages] = useState([])
+  const [displayWords, setDisplayWords] = useState([])
 
   useEffect(()=>{
     fetch("/me").then((response) => {
@@ -60,7 +61,9 @@ function renderErrors () {
       <Route exact path="/thesaurus">
         <Thesaurus
         setErrorMessages={setErrorMessages} 
-        renderErrors={renderErrors} />
+        renderErrors={renderErrors}
+        displayWords={displayWords}
+        setDisplayWords={setDisplayWords} />
       </Route>
       <Route exact path ="/addnewword">
         <AddNewWord 

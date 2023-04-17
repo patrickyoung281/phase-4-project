@@ -20,8 +20,7 @@ def create
     word=Word.new(word_params)
     word.user_id = current_user.id 
     synonym_id=params[:synonym_id]
-    if word.valid? && synonym_id
-        
+    if word.valid? 
         word.save
         synonym_word = SynonymWord.create(word_id: word.id, synonym_id: synonym_id)
         render json: word, status: :created 
@@ -61,7 +60,7 @@ end
 private 
 
 def word_params
-    params.permit(:word_entry, :definition, :image_url, :example_sentence, :gender, :plural, :part_of_speech, :english_translation, :user_id, :synonym_id)
+    params.permit(:word_entry, :definition, :image_url, :example_sentence, :gender, :plural, :part_of_speech, :english_translation, :synonym_id)
 end
 
 def authorize 

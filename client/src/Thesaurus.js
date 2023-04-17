@@ -3,9 +3,8 @@ import WordList from "./WordList";
 import WordDetails from "./WordDetails";
 
 
-function Thesaurus ( {setErrorMessages, renderErrors} ) {
+function Thesaurus ( {setErrorMessages, renderErrors, displayWords, setDisplayWords} ) {
 
-    const [displayWords, setDisplayWords] = useState([])
     const [selectedWord, setSelectedWord] = useState(false)
 
     const handleClick = (id) => {
@@ -20,7 +19,7 @@ function Thesaurus ( {setErrorMessages, renderErrors} ) {
         fetch("/words")
         .then((resp)=>resp.json())
         .then((data)=>setDisplayWords(data));
-    }, [])
+    }, [setDisplayWords])
 console.log("display", displayWords)
     return (
         <div>
