@@ -6,6 +6,12 @@ def index_by_id
     render json: synonyms 
 end
 
+def associated_words
+    synonym=Synonym.find(params[:id])
+    words=synonym.words
+    render json: words, only: :word_entry
+end
+
 def index
     synonyms=Synonym.all 
     render json: synonyms, include: :word 

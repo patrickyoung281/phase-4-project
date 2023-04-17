@@ -63,9 +63,19 @@ const calculateAverageRating = (synonymWord) => {
     return isNaN(average) ? null : average;
   };
 
-
+const handleDisplayAssociatedWords = (synonymID)=>{
+  fetch(`/synonyms/${synonymID}/words`)
+    .then((resp)=>resp.json())
+    .then((data)=>{
+      setDisplayAssociatedWords({
+        ...displayAssociatedWords,
+        [synonymID]: data
+      })
+    })
+}
 
 const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry, index)=>{
+    console.log("displaySynonyms", displaySynonyms)
     const avgRating = calculateAverageRating(entry);
     const showAssociatedWords = displayAssociatedWords[entry.id];
     return <ol key={entry.id}>
@@ -94,10 +104,7 @@ const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry,
                         </form>
                     </li>
                     <li><div>
-                      <button onClick={()=>setDisplayAssociatedWords({
-                        ...displayAssociatedWords,
-                        [entry.id]: !showAssociatedWords
-                      })}>
+                      <button onClick={()=>handleDisplayAssociatedWords(entry.id)}>
                         {showAssociatedWords ? 'Hide Associated Words' : 'See Associated Words'}
                         </button>
                         <span>Click here to view other words related to this synonym.</span>

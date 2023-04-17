@@ -12,5 +12,6 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
   post "/words/:word_id/synonyms/:id/rate", to: "synonym_words#rate"
+  get "/synonyms/:id/words", to: "synonyms#associated_words"
 
 end
