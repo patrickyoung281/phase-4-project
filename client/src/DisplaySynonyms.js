@@ -114,7 +114,7 @@ const showSynonyms = Array.isArray(displaySynonyms)? displaySynonyms.map((entry,
                       <button onClick={()=>handleDisplayAssociatedWords(entry.id)}>
                         {showAssociatedWords ? 'Hide Associated Words' : 'See Associated Words'}
                         </button>
-                        <span>Click here to view other words related to this synonym.</span>
+                        <span>Click here to view other main words related to this synonym.</span>
                       </div>
                       {showAssociatedWords && (
                         <ul>
