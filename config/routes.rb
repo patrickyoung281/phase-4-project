@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :synonyms, only: [:index, :create]
   post "/login", to: "sessions#create"
   post "/register", to: "users#create"
-  get '/words/:id/synonyms', to: 'synonyms#index_by_id'
+  get '/words/:id/synonyms', to: 'synonyms#show_by_word_id'
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
   post "/words/:word_id/synonyms/:id/rate", to: "synonym_words#rate"

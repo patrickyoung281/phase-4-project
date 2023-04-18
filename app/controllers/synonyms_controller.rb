@@ -1,6 +1,6 @@
 class SynonymsController < ApplicationController
 
-def index_by_id
+def show_by_word_id
     word = Word.find(params[:id])
     synonyms = word.synonyms
     render json: synonyms 
