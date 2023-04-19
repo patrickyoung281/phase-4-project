@@ -11,4 +11,5 @@ def rate
     end
 end
 
+
 end

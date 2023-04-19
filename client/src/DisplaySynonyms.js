@@ -13,6 +13,7 @@ useEffect (()=>{
     .then((data)=>{
       setDisplaySynonyms(data);
       const ratings = {};
+      console.log("help", data);
       data.forEach((synonym) => {
         ratings[synonym.id] = calculateAverageRating(synonym);
       });
@@ -36,7 +37,7 @@ useEffect (()=>{
           if (entry.id === synonymWord.id) {
             const updatedEntry = {
               ...entry,
-              user_ratings: [...(entry.user_ratings || []), data.user_rating],
+              user_rating: [...(entry.user_ratings || []), data.user_rating],
             };
             const updatedAvgRating = calculateAverageRating(updatedEntry);
             setAverageRatings({
