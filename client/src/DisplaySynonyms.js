@@ -37,7 +37,7 @@ useEffect (()=>{
           if (entry.id === synonymWord.id) {
             const updatedEntry = {
               ...entry,
-              user_rating: [...(entry.user_ratings || []), data.user_rating],
+              user_ratings: [...(entry.user_ratings || []), data.user_rating],
             };
             const updatedAvgRating = calculateAverageRating(updatedEntry);
             setAverageRatings({

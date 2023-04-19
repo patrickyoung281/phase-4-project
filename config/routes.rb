@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   post "/words/:word_id/synonyms/:id/rate", to: "synonym_words#rate"
   get "/synonyms/:id/words", to: "synonyms#associated_words"
+  
+  get '/rating_above_3', to: 'synonym_words#rating_above_3'
 
 end

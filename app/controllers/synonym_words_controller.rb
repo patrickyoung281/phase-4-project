@@ -11,5 +11,10 @@ def rate
     end
 end
 
+def rating_above_3
+    list = SynonymWord.where("user_rating >= ?", 3)
+    render json: list 
+end
+
 
 end
